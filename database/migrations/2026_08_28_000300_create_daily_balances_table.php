@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration; use Illuminate\Database\Schema\Blueprint; use Illuminate\Support\Facades\Schema;
+return new class extends Migration { public function up(): void { Schema::create('daily_balances', function (Blueprint $table) { $table->id(); $table->date('balance_date')->unique(); $table->decimal('opening_balance',12,2); $table->decimal('actual_closing',12,2)->nullable(); $table->text('notes')->nullable(); $table->foreignId('updated_by')->constrained('users'); $table->timestamps(); }); } public function down(): void { Schema::dropIfExists('daily_balances'); } };
